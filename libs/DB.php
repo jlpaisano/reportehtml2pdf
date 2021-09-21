@@ -15,7 +15,7 @@ class DB extends PDO {
                 ';host=' . $this->hostname;
         
         parent::__construct($dns, $this->username, $this->password,
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));                            
+                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));                          
 
     }
 

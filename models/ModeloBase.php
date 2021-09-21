@@ -3,12 +3,18 @@
 require_once './libs/DB.php';
 
 class ModeloBase extends DB {
-    public $db;
+    #comentado para ver si funciona public $db; 
 
     public function __construct() {
-        $this->db = new DB();
+        /* de esta manera no es necesario crear la variable $db
+        y se pueden llamar directamente a las funciones desde el objeto con 
+        $this->
+         $this->db = new DB();
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); */
+        parent::__construct();        
+        $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     public function insertar($tabla, $datos) {
@@ -68,11 +74,12 @@ class ModeloBase extends DB {
 
     public function obtenerTodos($query) {
         try {
-            #echo 'Se obtiene todo';
-            #return $this->db->query($query); 
-            $q = $this->db->prepare($query);           
-            $q->execute();
-            return $q->fetchAll();
+
+           /*  $q = $this->prepare($query);           
+            $q->execute();            
+            return $q->fetchAll(); */
+
+            return $this->query($query)->fetchAll();
 
         } catch (Excetption $e) {
             echo 'Error: ' . $e->getMessage();
