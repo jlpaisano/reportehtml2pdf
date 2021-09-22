@@ -9,15 +9,15 @@
   $cont = 0;
   $catAnterior = 'original';
   foreach( $productos as $producto) {    
-    if ( $cont < 9 && ($catAnterior == $producto['categoria'] || $catAnterior == 'original') ) {
+    if ( $cont < 9 && ($catAnterior == $producto['subcategoria'] || $catAnterior == 'original') ) {
         $pagina[] = $producto;
         $cont++;
-        $catAnterior = $producto['categoria'];
+        $catAnterior = $producto['subcategoria'];
     } else{
         $cont = 0;
         $paginas[] = $pagina; 
         $pagina = [];
-        $catAnterior = $producto['categoria'];
+        $catAnterior = $producto['subcategoria'];
     }
    
   }
@@ -63,10 +63,10 @@
             <page>
             <page_footer><p style="text-align:center;"> jlpaisano@gmail.com - Página [[page_cu]] de [[page_nb]]</p></page_footer>
             <page_header> <img src="img/logo-social.png" alt=""> </page_header>
-
-             <h1 align="center"> Categoria <?php echo $pagina[0]['categoria']; ?></h1>
-             <br>
-             <br>
+            <br>
+            <br>
+            <h1 align="center"> <?php echo $pagina[0]['categoria'].'-'.$pagina[0]['subcategoria']; ?></h1>
+            <br>
 
             <table align="center" style="border: 1px solid green;" >
                 <tbody>
