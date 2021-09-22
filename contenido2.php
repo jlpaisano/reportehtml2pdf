@@ -2,6 +2,27 @@
   require_once 'controllers/ProductosController.php';
   $producto = new ProductoController();
   $productos = $producto->obtenerProductos();
+
+  #se arman las páginas de 9 o se salta cuando cambia la categoria
+  $paginas = [];
+  $pagina = [];
+  $cont = 0;
+  $catAnterior = 'original';
+  foreach( $productos as $producto) {    
+    if ( $cont < 9 && ($catAnterior == $producto['categoria'] || $catAnterior == 'original') ) {
+        $pagina[] = $producto;
+        $cont++;
+        $catAnterior = $producto['categoria'];
+    } else{
+        $cont = 0;
+        $paginas[] = $pagina; 
+        $pagina = [];
+        $catAnterior = $producto['categoria'];
+    }
+   
+  }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +56,7 @@
         <h1 align="center"> Listado de productos</h1> -->
 
         <?php
-        $paginas = array_chunk($productos, 9, true);
+        #$paginas = array_chunk($productos, 9, true);
 
         foreach ( $paginas as $pagina) {            
         ?>
@@ -43,7 +64,7 @@
             <page_footer><p style="text-align:center;"> jlpaisano@gmail.com - Página [[page_cu]] de [[page_nb]]</p></page_footer>
             <page_header> <img src="img/logo-social.png" alt=""> </page_header>
 
-             <h1 align="center"> Listado de productos</h1>
+             <h1 align="center"> Categoria <?php echo $pagina[0]['categoria']; ?></h1>
              <br>
              <br>
 
@@ -75,45 +96,6 @@
 
         
 
-
-      
-
-        <!-- <table style="border: 2px solid green;">
-            <tbody>
-            
-                <?php for ( $i = 0; $i < 3; $i++) { ?>
-                    <tr>
-                        <td style="border: 1px solid green;">
-                            <div>
-                                <img class="fotos" src="img/03010017.jpg " alt="">
-                                <p align="center">ROLING METAL</p>
-                                <p align="center"><b>Código:</b> 03010017</p>
-                            </div> 
-                        </td>
-                        <td style="border: 1px solid green;">
-                            <div>
-                                <img class="fotos" src="img/03010001.jpg" alt="">
-                                <p align="center">ARO NEGRO PLASTICO</p>
-                                <p align="center"><b>Código:</b> 03010001</p>
-                            </div> 
-                        </td>
-                        <td style="border: 1px solid green;">
-                            <div>
-                                <img class="fotos" src="img/03010048.jpg" alt="">
-                                <p align="center">VENTILADOR DE MOTOR</p>
-                                <p align="center"><b>Código:</b> 03010048</p>
-                            </div> 
-                        </td>
-                    </tr>
-
-                <?php } ?>
-            </tbody>
-        </table>  -->
-    
-
-
-
- 
     
 </body>
 

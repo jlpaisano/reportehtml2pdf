@@ -5,6 +5,7 @@
     $html2pdf->setTestTdInOnePage(false);
     ob_start();
     require_once 'contenido2.php';
+    #require_once 'contenido4.php';
     $html = ob_get_clean();
      
     $html2pdf->writeHTML($html);

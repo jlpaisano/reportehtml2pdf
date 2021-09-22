@@ -57,7 +57,7 @@ class Producto extends ModeloBase {
 #-------------------------------------------------------------------------------------------
 	public function obtenerProductos() {
 		#$db = new ModeloBase();
-		$query = "SELECT productos.* FROM productos
+		$query = "SELECT productos.codigo as codigo, productos.nombre as nombre, productos.imagen, categorias.nombre as categoria FROM productos
 							LEFT JOIN categorias ON categorias.id = productos.id_categoria";
 		$resultado = $this->obtenerTodos($query);		
 		return $resultado;
